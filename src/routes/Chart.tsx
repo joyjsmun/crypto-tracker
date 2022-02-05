@@ -46,6 +46,11 @@ function Chart({coinId}:ChartProps){
             curve:"smooth",
             width: 4,
         },
+        tooltip:{
+            y:{
+               formatter:(value) => `${value.toFixed(2)}`, 
+            }
+        },
         yaxis:{
             show:false,
         },
@@ -53,12 +58,14 @@ function Chart({coinId}:ChartProps){
         xaxis:{
             axisTicks:{show:false},
             labels:{show:false},
-            axisBorder:{show:false}
+            axisBorder:{show:false},
+            categories:data?.map(price => price.time_close),
+            type:"datetime",
         },
         fill: {
         type:"gradient",
-        gradient:{gradientToColors:["blue"]}},
-        colors:["red"],
+        gradient:{gradientToColors:["#0be881"], stops:[0,100]}},
+        colors:["#0fbcf9"],
     }}
     />)
     }
