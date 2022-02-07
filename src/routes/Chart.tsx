@@ -23,7 +23,7 @@ function Chart({coinId}:ChartProps){
         refetchInterval:10000,
     } 
     );
-    
+  
     return <div>
         {isLoading ? ("Loading..") : 
     

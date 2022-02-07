@@ -7,7 +7,7 @@ import {Helmet} from "react-helmet";
 import { useQuery } from "react-query";
 import { fetchCoinInfo, fetchCoins, fetchCoinTickers } from "../api";
 
-const Container = styled.div`
+const Container = styled.div `
     padding: 20px 20px;
     margin:0 auto;
     max-width:480px;
@@ -79,6 +79,7 @@ const Tab = styled.span <{isActive:boolean}>`
         display: block;
     }
 `;
+
 
 const MenuTab = styled.div`
     display: flex;
@@ -211,7 +212,6 @@ const loading = infoLoading || tickersLoading;
     return (
     <Container>
         <MenuTab>
-            <MenuTabButton>dark / light</MenuTabButton>
             {coinId !== null ?  <MenuTabButton><Link to="/">Go Back to Coins List</Link></MenuTabButton> : null}
         </MenuTab>
         <Helmet>
@@ -262,7 +262,7 @@ const loading = infoLoading || tickersLoading;
            </Tabs>
             <Switch>
                 <Route path ={`/:coinId/price`} >
-                    <Price />
+                    <Price coinId={coinId} />
                 </Route>
                 <Route path ={`/:coinId/chart`}>
                     <Chart coinId={coinId} />

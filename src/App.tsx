@@ -2,7 +2,7 @@ import Router from './Router';
 import {createGlobalStyle} from "styled-components";
 import {ReactQueryDevtools } from "react-query/devtools";
 
-const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle<{isDarkMode:boolean}>`
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Source+Code+Pro&family=Source+Sans+Pro:wght@300&display=swap');
 
 html, body, div, span, applet, object, iframe,
@@ -53,8 +53,8 @@ table {
 }
 body{
   font-family:'Source Sans Pro', sans-serif;
-  background-color:${(props) => props.theme.bgColor};
-  color:${(props) => props.theme.textColor}
+  background-color:${(props) => props.isDarkMode? props.theme.bgColor : props.theme.lightBgColor};
+  color:${(props) => props.isDarkMode? props.theme.textColor : props.theme.lightTextColor}}
 }
 
 
@@ -62,12 +62,14 @@ a{
   text-decoration:none;
   color:inherit;
 }
+
+
 `
 
 function App() {
   return (
     <>
-    <GlobalStyle/>
+    <GlobalStyle isDarkMode={true}/>
     <Router />
 	<ReactQueryDevtools initialIsOpen={true}/>
     </>
