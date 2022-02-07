@@ -15,4 +15,4 @@
 - [ ] toggle dark / light mode
 - [x] Back Button to Home
 - [x] /:coinId/price tab
-- [ ] CandleStick chart on the /:coinId/chart tab
+- [x] CandleStick chart on the /:coinId/chart tab

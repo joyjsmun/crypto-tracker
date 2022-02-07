@@ -19,35 +19,29 @@ interface IHistoricalData {
 
 function Chart({coinId}:ChartProps){
     const {isLoading,data} = useQuery<IHistoricalData[]>(["ohlcv",coinId], () => fetchCoinHistory(coinId),
-    // {
-    //     refetchInterval:10000,
-    // } 
+    {
+        refetchInterval:10000,
+    } 
     );
   
     return <div>
         {isLoading ? ("Loading..") : 
     
         (<ApexChart 
-            type="candlestick"
-           series={[
-               {
-                data:data?.map(p => (
-                    {
-                        x: p.time_open,
-                        y:[p.open,p.high,p.low,p.close]
-                    }
-                ))                  
-               }
-           ]}
-
-        options={{
+            type="line"
+        series={[
+            {
+                name: "Price",
+                data : data?.map(price => price.close)
+            },
+         ]}
+    options={{
         theme:{
             mode:"dark"
         },
         chart:{
-            type:"candlestick",
-            height: 600,
-            width:600,
+            height: 300,
+            width:500,
             toolbar:{
                 show:false,
             },
@@ -55,37 +49,29 @@ function Chart({coinId}:ChartProps){
         },
         stroke: {
             curve:"smooth",
-            width: 1,
+            width: 4,
         },
-       yaxis:{
-           show:true,
-           labels:{
-               formatter:(val) => {
-                return val.toFixed(3);
-              }
-           }
-       },
         tooltip:{
             y:{
                formatter:(value) => `${value.toFixed(2)}`, 
-            },
-           
-                enabled: true
+            }
         },
-        grid: {show:true},
+        yaxis:{
+            show:false,
+        },
+        grid: {show:false},
         xaxis:{
             axisTicks:{show:false},
-            labels:{show:true},
+            labels:{show:false},
             axisBorder:{show:false},
             categories:data?.map(price => price.time_close),
             type:"datetime",
         },
-       /*  fill: {
+        fill: {
         type:"gradient",
         gradient:{gradientToColors:["#0be881"], stops:[0,100]}},
-        colors:["#0fbcf9"], */
+        colors:["#0fbcf9"],
     }}
-
     />)
     }
     </div>
