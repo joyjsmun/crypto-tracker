@@ -24,7 +24,8 @@ function Chart({coinId}:ChartProps){
     } 
     );
     
-    return <div>{isLoading ? ("Loading..") : 
+    return <div>
+        {isLoading ? ("Loading..") : 
     
         (<ApexChart 
             type="line"
