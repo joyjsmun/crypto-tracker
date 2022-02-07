@@ -3,6 +3,7 @@ import { Link, Route, Switch, useLocation, useParams, useRouteMatch } from "reac
 import styled from "styled-components";
 import Price from "./Price";
 import Chart from "./Chart";
+import {Helmet} from "react-helmet";
 import { useQuery } from "react-query";
 import { fetchCoinInfo, fetchCoins, fetchCoinTickers } from "../api";
 
@@ -154,15 +155,14 @@ function Coin(){
     const {state} = useLocation<RouteState>();
     const priceMatch = useRouteMatch("/:coinId/price");
     const chartMatch = useRouteMatch("/:coinId/chart");
-
     const {isLoading : infoLoading, data:infoData } = useQuery<InfoData>(["info",coinId],() => fetchCoinInfo(coinId));
     const {isLoading : tickersLoading, data:tickersData} = useQuery<PriceData>(["tickers",coinId],
-    () => fetchCoinTickers(coinId)),
+    () => fetchCoinTickers(coinId),
     {
         refetchInterval:5000,
     }
-}
-
+    );
+const loading = infoLoading || tickersLoading;
 
     /* 
     const [loading, setLoading] = useState(true);
@@ -185,8 +185,12 @@ function Coin(){
         })();
     },[coinId]) */
 
-    const loading = infoLoading || tickersLoading;
-    return <Container>
+   
+    return (
+    <Container>
+        <Helmet>
+            <title>{state?.name ? state.name : loading ? "Loading..." : infoData?.name}</title>
+        </Helmet>
     <Header>
         <Title>{state?.name ? state.name : loading ? "Loading..." : infoData?.name}</Title>
     </Header>
@@ -205,7 +209,7 @@ function Coin(){
                 </OverviewItem>
                 <OverviewItem>
                 <span>Price</span>
-                <span>{tickersData?.quotes.USD.price.toFixed(3)}</span>
+                <span>${tickersData?.quotes.USD.price}</span>
                 </OverviewItem>
            </Overview>
            <Description>{infoData?.description}</Description>
@@ -236,7 +240,9 @@ function Coin(){
                 </Route>
             </Switch>
            </>
-       ) } </Container>;
+       ) } 
+       </Container>
+    );
 }
     
 
