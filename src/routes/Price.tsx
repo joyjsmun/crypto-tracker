@@ -60,8 +60,6 @@ const PriceTab = styled.div`
 function Price({coinId}:PriceProps){
     const {isLoading, data:tickerData} = useQuery<PriceData>(["priceTag",coinId],() => fetchPriceHistory(coinId));
     
-    
-    console.log(tickerData?.quotes.USD.percent_change_1h)
     return (<div>
        {isLoading ? ("Loading..." 
        ) : (

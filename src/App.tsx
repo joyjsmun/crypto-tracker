@@ -54,7 +54,7 @@ table {
 body{
   font-family:'Source Sans Pro', sans-serif;
   background-color:${(props) => props.isDarkMode? props.theme.bgColor : props.theme.lightBgColor};
-  color:${(props) => props.isDarkMode? props.theme.textColor : props.theme.lightTextColor}}
+  color:${(props) => props.isDarkMode? props.theme.textColor : props.theme.lightTextColor}};
 }
 
 
@@ -67,9 +67,16 @@ a{
 `
 
 function App() {
+const darkMode = true;
+if(darkMode){
+	
+}else{
+
+}
   return (
     <>
-    <GlobalStyle isDarkMode={true}/>
+    <GlobalStyle isDarkMode />
+	{darkMode ? "yes Dark" : "light mode"}
     <Router />
 	<ReactQueryDevtools initialIsOpen={true}/>
     </>
