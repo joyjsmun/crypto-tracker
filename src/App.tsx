@@ -1,8 +1,11 @@
 import Router from './Router';
 import {createGlobalStyle} from "styled-components";
 import {ReactQueryDevtools } from "react-query/devtools";
+import { ThemeProvider } from 'styled-components';
+import {darkTheme,lightTheme} from "./theme";
+import { useState } from 'react';
 
-const GlobalStyle = createGlobalStyle<{isDarkMode:boolean}>`
+const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Source+Code+Pro&family=Source+Sans+Pro:wght@300&display=swap');
 
 html, body, div, span, applet, object, iframe,
@@ -53,8 +56,8 @@ table {
 }
 body{
   font-family:'Source Sans Pro', sans-serif;
-  background-color:${(props) => props.isDarkMode? props.theme.bgColor : props.theme.lightBgColor};
-  color:${(props) => props.isDarkMode? props.theme.textColor : props.theme.lightTextColor}};
+  background-color:${(props) => props.theme.bgColor};
+  color:${(props) => props.theme.textColor}};
 }
 
 
@@ -63,22 +66,20 @@ a{
   color:inherit;
 }
 
-
 `
 
 function App() {
-const darkMode = true;
-if(darkMode){
-	
-}else{
+const [isDark,setIsDark] = useState(false);
+const toggleDark = () => setIsDark((current) => !current);
 
-}
   return (
     <>
-    <GlobalStyle isDarkMode />
-	{darkMode ? "yes Dark" : "light mode"}
+	<ThemeProvider theme={isDark? darkTheme : lightTheme}>
+		<button onClick={toggleDark}>Toggle Mode</button>
+    <GlobalStyle />
     <Router />
 	<ReactQueryDevtools initialIsOpen={true}/>
+    </ThemeProvider>
     </>
   );
 }

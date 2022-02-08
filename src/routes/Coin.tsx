@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Link, Route, Switch, useLocation, useParams, useRouteMatch } from "react-router-dom";
 import styled from "styled-components";
 import Price from "./Price";
@@ -97,7 +96,7 @@ const MenuTabButton = styled.button`
        background-color: ${(props) => props.theme.accentColor};
     }
     :last-child{
-        background-color: ${(props) => props.theme.btnColor};
+        background-color: ${(props) => props.theme.accentColor};
     }
 
 
