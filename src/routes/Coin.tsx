@@ -171,8 +171,12 @@ interface PriceData{
     } ;
 }
 
+interface ICoins {
+    toggleDark:() => void;
+}
 
-function Coin(){
+
+function Coin({toggleDark}:ICoins){
     const {coinId} = useParams<RouteParams>();
     const {state} = useLocation<RouteState>();
     const priceMatch = useRouteMatch("/:coinId/price");
@@ -206,7 +210,7 @@ const loading = infoLoading || tickersLoading;
 
         })();
     },[coinId]) */
-
+ 
    
     return (
     <Container>
@@ -218,6 +222,7 @@ const loading = infoLoading || tickersLoading;
         </Helmet>
     <Header>
         <Title>{state?.name ? state.name : loading ? "Loading..." : infoData?.name}</Title>
+        <button onClick={toggleDark}>Toggle Dark Mode</button>
     </Header>
     <div>
    
