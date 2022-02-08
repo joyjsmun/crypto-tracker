@@ -8,6 +8,7 @@
 - Styled Components
 - React Hook Form
 - ApexChart
+- Recoil
 
 
 ### Need to Implement the extra functions below
