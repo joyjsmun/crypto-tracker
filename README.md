@@ -17,6 +17,7 @@
 - [x] Back Button to Home
 - [x] /:coinId/price tab
 - [x] CandleStick chart on the /:coinId/chart tab
+- [ ] Improve UI
 
 
 
